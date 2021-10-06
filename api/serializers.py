@@ -1,9 +1,10 @@
 from rest_framework.serializers import ModelSerializer
-from .models import StaticWeapon
+from .models import StaticWeapon, Plug, PlugSet
 
 class StaticWeaponSerializer(ModelSerializer):
   class Meta:
     model = StaticWeapon
+    depth = 2
     fields = [
       'hash',
       'name',
@@ -19,4 +20,22 @@ class StaticWeaponSerializer(ModelSerializer):
       'column_two_hash',
       'column_three_hash',
       'column_four_hash',
+    ]
+
+class PlugSerializer(ModelSerializer):
+  class Meta:
+    model = Plug
+    fields = [
+      'hash',
+      'name',
+      'icon',
+      'description'
+    ]
+
+class PlugSetSerializer(ModelSerializer):
+  class Meta:
+    model = PlugSet
+    fields = [
+      'hash',
+      'reusable_plug_items'
     ]

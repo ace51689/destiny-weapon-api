@@ -2,5 +2,10 @@
 <a href='/api/'>API</a>
 
 {% comment %} {% for item in weapons %} {% endcomment %}
-<h1>{{weapon.weapon_dict.displayProperties.icon}}</h1>
+{% comment %} <h1>{{weapon.weapon_dict.displayProperties.icon}}</h1> {% endcomment %}
 {% comment %} {% endfor %}  {% endcomment %}
+
+{% for item in weapon %}
+  <h1>{{item.name}}</h1>
+  <p>{{item.description}}</p>
+{% endfor %}
