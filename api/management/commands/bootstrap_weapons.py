@@ -93,26 +93,28 @@ class Command(BaseCommand):
       if StaticWeapon.objects.filter(hash=weapon['hash']).exists():
         # Updates StaticWeapon if it already exists
         weapon_to_update = StaticWeapon.objects.get(hash=weapon['hash'])
+        print(f'Updating "{weapon_to_update.name}"')
         
-        weapon_to_update.name = display_properties['name'],
-        weapon_to_update.icon = display_properties['icon'],
-        weapon_to_update.flavor_text = weapon['flavorText'],
-        weapon_to_update.tier_type = inventory['tierTypeName'],
-        weapon_to_update.weapon_type = weapon['itemTypeDisplayName'],
-        weapon_to_update.slot_type = slot_type,
-        weapon_to_update.ammo_type = ammo_type,
-        weapon_to_update.damage_type = damage_type,
-        weapon_to_update.watermark_icons = quality['displayVersionWatermarkIcons'],
-        weapon_to_update.index = weapon['index'],
-        weapon_to_update.column_one_hash = column_one_set,
-        weapon_to_update.column_two_hash = column_two_set,
-        weapon_to_update.column_three_hash = column_three_set,
+        weapon_to_update.name = display_properties['name']
+        weapon_to_update.icon = display_properties['icon']
+        weapon_to_update.flavor_text = weapon['flavorText']
+        weapon_to_update.tier_type = inventory['tierTypeName']
+        weapon_to_update.weapon_type = weapon['itemTypeDisplayName']
+        weapon_to_update.slot_type = slot_type
+        weapon_to_update.ammo_type = ammo_type
+        weapon_to_update.damage_type = damage_type
+        weapon_to_update.watermark_icons = quality['displayVersionWatermarkIcons']
+        weapon_to_update.index = weapon['index']
+        weapon_to_update.column_one_hash = column_one_set
+        weapon_to_update.column_two_hash = column_two_set
+        weapon_to_update.column_three_hash = column_three_set
         weapon_to_update.column_four_hash = column_four_set
 
         weapon_to_update.save()
+        print(f'Updated "{weapon_to_update.name}"')
       else:
       # Creates a StaticWeapon object if one doesn't already exist
-        StaticWeapon.objects.create(
+        new_weapon = StaticWeapon.objects.create(
           hash = weapon['hash'],
           name = display_properties['name'],
           icon = display_properties['icon'],
@@ -129,3 +131,4 @@ class Command(BaseCommand):
           column_three_hash = column_three_set,
           column_four_hash = column_four_set,
         )
+        print(f'Created "{new_weapon.name}"')

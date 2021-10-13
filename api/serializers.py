@@ -16,6 +16,7 @@ class StaticWeaponSerializer(ModelSerializer):
       'ammo_type',
       'damage_type',
       'watermark_icons',
+      'index',
       'column_one_hash',
       'column_two_hash',
       'column_three_hash',

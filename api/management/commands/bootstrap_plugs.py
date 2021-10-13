@@ -34,6 +34,7 @@ class Command(BaseCommand):
     for plug in plugs_list:
       display_properties = plug['displayProperties']
       
+      # Updates Plug objects if they already exist 
       if Plug.objects.filter(hash=plug['hash']).exists():
         plug_to_update = Plug.objects.get(hash=plug['hash'])
         
@@ -47,12 +48,14 @@ class Command(BaseCommand):
           plug_to_update.description = display_properties['description']
         
         plug_to_update.save()
+        print(f'Updated "{plug_to_update.name}" Plug object')
       
       else:
-      
-        Plug.objects.create(
+        # Creates Plug object if one doesn't already exist
+        plug = Plug.objects.create(
           hash = plug['hash'],
           name = display_properties['name'],
           icon = display_properties['icon'],
           description = display_properties['description']
         )
+        print(f'Created "{plug.name}" Plug object')
