@@ -23,6 +23,7 @@ class StaticWeapon(models.Model):
   damage_type = models.CharField(max_length=7, editable=False)
   watermark_icons = models.JSONField()
   index = models.PositiveBigIntegerField(editable=False)
+  is_sunset = models.BooleanField(default=False)
   column_one_hash = models.ForeignKey('PlugSet', related_name='column_one', on_delete=models.SET_NULL, null=True, blank=True)
   column_two_hash = models.ForeignKey('PlugSet', related_name='column_two', on_delete=models.SET_NULL, null=True, blank=True)
   column_three_hash = models.ForeignKey('PlugSet', related_name='column_three', on_delete=models.SET_NULL, null=True, blank=True)
@@ -30,3 +31,9 @@ class StaticWeapon(models.Model):
 
   def __str__(self):
     return self.name
+
+# class WishlistWeapon(models.Model):
+  # hash = models.PositiveBigIntegerField(primary_key=True, editable=False)
+  # vanguard = models.JSONField()
+  # crucible = models.JSONField()
+  # gambit = models.JSONField()

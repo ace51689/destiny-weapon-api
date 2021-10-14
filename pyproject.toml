@@ -10,6 +10,7 @@ Django = "^3.2.7"
 requests = "^2.26.0"
 django-cors-headers = "^3.9.0"
 djangorestframework = "^3.12.4"
+django-bootstrap4 = "^3.0.1"
 
 [tool.poetry.dev-dependencies]
 

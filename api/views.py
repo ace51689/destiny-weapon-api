@@ -28,4 +28,5 @@ def index_view(request):
   column_one = weapon.column_one_hash.reusable_plug_items.all()
   plugset = PlugSet.objects.get(hash=3541408343)
   reusable_items = plugset.reusable_plug_items.all()
-  return render(request, 'index.html', {'weapon': column_one})
+  weapons = StaticWeapon.objects.all().order_by('-index')
+  return render(request, 'index.html', {'weapons': weapons})

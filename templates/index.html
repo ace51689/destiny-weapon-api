@@ -5,7 +5,7 @@
 {% comment %} <h1>{{weapon.weapon_dict.displayProperties.icon}}</h1> {% endcomment %}
 {% comment %} {% endfor %}  {% endcomment %}
 
-{% for item in weapon %}
-  <h1>{{item.name}}</h1>
-  <p>{{item.description}}</p>
+{% for weapon in weapons %}
+  <h1>{{weapon.name}}</h1>
+  <p>{{weapon.flavor_text}}</p>
 {% endfor %}

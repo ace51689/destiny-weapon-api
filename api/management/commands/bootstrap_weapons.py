@@ -66,6 +66,12 @@ class Command(BaseCommand):
       else: # weapon['defaultDamageType'] == 6
         damage_type = 'Stasis'
 
+      # Determining if the weapon has a non-sunset version
+      if quality['versions'][-1]['powerCapHash'] > 1862490585:
+        sunset = False
+      else:
+        sunset = True
+
       # Finding the PlugSet for column one
       if socket_entries[1].get('randomizedPlugSetHash', None) != None and PlugSet.objects.filter(hash=socket_entries[1]['randomizedPlugSetHash']).exists():
         column_one_set = PlugSet.objects.get(hash=socket_entries[1]['randomizedPlugSetHash'])
@@ -105,6 +111,7 @@ class Command(BaseCommand):
         weapon_to_update.damage_type = damage_type
         weapon_to_update.watermark_icons = quality['displayVersionWatermarkIcons']
         weapon_to_update.index = weapon['index']
+        weapon_to_update.is_sunset = sunset
         weapon_to_update.column_one_hash = column_one_set
         weapon_to_update.column_two_hash = column_two_set
         weapon_to_update.column_three_hash = column_three_set
@@ -126,6 +133,7 @@ class Command(BaseCommand):
           damage_type = damage_type,
           watermark_icons = quality['displayVersionWatermarkIcons'],
           index = weapon['index'],
+          is_sunset = sunset,
           column_one_hash = column_one_set,
           column_two_hash = column_two_set,
           column_three_hash = column_three_set,
