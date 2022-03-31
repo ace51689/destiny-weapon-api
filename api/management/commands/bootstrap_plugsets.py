@@ -19,14 +19,25 @@ class Command(BaseCommand):
 
     '''List comprehension returning only weapon objects of weapons that are 
     randomly rollable'''
-    plug_set_list = [plug_set_definitions[item] for item in plug_set_definitions if plug_set_definitions[item]['isFakePlugSet'] == False]
+    single_plug_plugset_hashes = [405, 408, 411, 503, 1443, 1445, 1447]
+
+    # plug_set_list = [plug_set_definitions[item] for item in plug_set_definitions if plug_set_definitions[item]['hash'] in single_plug_plugset_hashes or (plug_set_definitions[item]['redacted'] == False and plug_set_definitions[item]['isFakePlugSet'] == False)]
+    plug_set_list = [plug_set_definitions[item] for item in plug_set_definitions if plug_set_definitions[item]['redacted'] == False]
 
     for plug_set in plug_set_list:
   
       plug_set_hash = plug_set['hash']
 
-      plug_hashes = [item['plugItemHash'] for item in plug_set['reusablePlugItems'] if item['currentlyCanRoll']]
-      
+      plug_hashes = [item['plugItemHash'] for item in plug_set['reusablePlugItems'] if item.get('currentlyCanRoll') != False]
+
+      if PlugSet.objects.filter(hash=plug_set_hash).exists():
+        plug_set_to_get = PlugSet.objects.get(hash=plug_set_hash)
+        for plug in plug_set_to_get.reusable_plug_items.all():        
+          if plug.hash not in plug_hashes:
+            plug_to_get = Plug.objects.get(hash=plug.hash)
+            print(f'Updating PlugSet {plug_set_hash} removing Plug hash {plug.hash}')
+            plug_set_to_get.reusable_plug_items.remove(plug_to_get)
+
       for plug_hash in plug_hashes:
                   
         # Updates PlugSet object if it already exists
@@ -36,7 +47,6 @@ class Command(BaseCommand):
           plug_to_get = Plug.objects.get(hash=plug_hash)
           if plug_to_get not in plug_set_to_get.reusable_plug_items.all():
             plug_set_to_get.reusable_plug_items.add(plug_to_get)
-        
         
         # Creates PlugSet object if it doesn't already exist
         if Plug.objects.filter(hash=plug_hash).exists() and not PlugSet.objects.filter(hash=plug_set_hash).exists():

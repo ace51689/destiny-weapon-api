@@ -21,7 +21,8 @@ class Command(BaseCommand):
     # Plug display names to help narrow down the plugs to keep
     item_display_names = ['Barrel', 'Sight', 'Magazine', 'Stock', 'Trait',
                           'Blade', 'Battery', 'Guard', 'Launcher Barrel',
-                          'Bowstring', 'Arrow']
+                          'Bowstring', 'Arrow', 'Scope', 'Haft', 'Grip',
+                          'Enhanced Trait', 'Origin Trait']
 
     # List comprehension returning only plug objects of plugs that weapon
     # plug sets can roll
@@ -33,13 +34,18 @@ class Command(BaseCommand):
 
     for plug in plugs_list:
       display_properties = plug['displayProperties']
+
+      if plug['itemTypeDisplayName'] == 'Enhanced Trait':
+        plug_name = f"Enhanced {display_properties['name']}"
+      else:
+        plug_name = display_properties['name']
       
       # Updates Plug objects if they already exist 
       if Plug.objects.filter(hash=plug['hash']).exists():
         plug_to_update = Plug.objects.get(hash=plug['hash'])
         
-        if plug_to_update.name != display_properties['name']:
-          plug_to_update.name = display_properties['name']
+        if plug_to_update.name != plug_name:
+          plug_to_update.name = plug_name
         
         if plug_to_update.icon != display_properties['icon']:
           plug_to_update.icon = display_properties['icon']
@@ -54,8 +60,9 @@ class Command(BaseCommand):
         # Creates Plug object if one doesn't already exist
         plug = Plug.objects.create(
           hash = plug['hash'],
-          name = display_properties['name'],
+          name = plug_name,
           icon = display_properties['icon'],
           description = display_properties['description']
         )
         print(f'Created "{plug.name}" Plug object')
+    
