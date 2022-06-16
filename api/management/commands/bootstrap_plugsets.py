@@ -1,13 +1,19 @@
 from django.core.management.base import BaseCommand, CommandError
 from api.models import PlugSet, Plug
 import requests
+from environ import Env
+
+env = Env()
+Env.read_env()
+
+API_KEY = env('API_KEY', default='temp')
 
 class Command(BaseCommand):
 
   def handle(self, *args, **options):
     # Defining the url and headers for our request
     url = 'https://www.bungie.net/Platform/Destiny2/Manifest'
-    headers = {'x-api-key': 'f5268091535243949c8bb6ace14cc3c3'}
+    headers = {'x-api-key': API_KEY}
     
     # Requesting the manifest
     manifest = requests.get(url, headers=headers)
