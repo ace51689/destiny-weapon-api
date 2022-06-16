@@ -7,6 +7,9 @@ class Plug(models.Model):
   icon = models.CharField(max_length=100)
   description = models.TextField(editable=False)
 
+  def __str__(self):
+    return self.name
+
 class PlugSet(models.Model):
   hash = models.PositiveBigIntegerField(primary_key=True, editable=False)
   reusable_plug_items = models.ManyToManyField('Plug', symmetrical=False, editable=False)

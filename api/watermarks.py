@@ -1,11 +1,14 @@
+# These dictionaries are used to help identify what season each weapon is from
 expansions_dictionary = {
   'beyond_light': ['hunt', 'chosen', 'splicer', 'lost', 'anniversary'],
   'shadowkeep': ['undying', 'dawn', 'worthy', 'arrivals'],
   'forsaken': ['outlaw', 'forge', 'drifter', 'opulence'],
-  'witch_queen': ['risen']
+  'witch_queen': ['risen', 'haunted']
 }
 
 seasons_dictionary = {
+      # haunted
+      '/common/destiny2_content/icons/81edbfbf0bacf8e2117c00d1d6115f1b.png': 'haunted',
       # witch queen
       '/common/destiny2_content/icons/4fe83598190610f122497d22579a1fd9.png': 'risen',
       # risen
@@ -56,6 +59,8 @@ seasons_dictionary = {
 }
 
 watermark_list = [
+      # haunted
+      '/common/destiny2_content/icons/81edbfbf0bacf8e2117c00d1d6115f1b.png',
       # witch queen
       '/common/destiny2_content/icons/4fe83598190610f122497d22579a1fd9.png',
       # risen
@@ -106,6 +111,8 @@ watermark_list = [
     ]
 
 relevent_watermark_list = [
+      # haunted
+      '/common/destiny2_content/icons/81edbfbf0bacf8e2117c00d1d6115f1b.png',
       # witch queen
       '/common/destiny2_content/icons/4fe83598190610f122497d22579a1fd9.png',
       # risen

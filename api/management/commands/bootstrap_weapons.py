@@ -26,7 +26,6 @@ class Command(BaseCommand):
                     item in 
                     inventory_item_definitions if
                     inventory_item_definitions[item]['itemType'] == 3 and
-                    inventory_item_definitions[item].get('collectibleHash', False) and
                     inventory_item_definitions[item]['inventory']['tierType'] > 4 and
                     inventory_item_definitions[item].get('iconWatermark', False) and
                     inventory_item_definitions[item]['sockets']['socketEntries'][1]['reusablePlugItems'] != []
@@ -40,6 +39,8 @@ class Command(BaseCommand):
       collectible_definitions if collectible_definitions[item]['itemHash']
       in weapon_hash_list
     ]
+
+    collections_hash_list = [item['itemHash'] for item in collections_list]
     
     for weapon in weapons_list:
       # Direct paths to displayProperties, inventory, quality, socketEntries and equippingBlock
@@ -125,7 +126,6 @@ class Command(BaseCommand):
         if watermark in quality['displayVersionWatermarkIcons']:
           current_watermark = watermark
           break
-        # print('No watermark found!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
       for watermark in reversed(watermark_list):
         if watermark in quality['displayVersionWatermarkIcons']:
@@ -154,8 +154,12 @@ class Command(BaseCommand):
         if original_nonsunset_season in expansions_dictionary[expansion]:
           original_nonsunset_expansion = expansion
 
-      source_hash = [item['sourceHash'] for item in collections_list if item['itemHash'] == weapon['hash']][0]
-      source_string = [item['sourceString'] for item in collections_list if item['itemHash'] == weapon['hash']][0].replace("Source: ", "")
+      if weapon['hash'] in collections_hash_list:
+        source_hash = [item['sourceHash'] for item in collections_list if item['itemHash'] == weapon['hash']][0]
+        source_string = [item['sourceString'] for item in collections_list if item['itemHash'] == weapon['hash']][0].replace("Source: ", "")
+      else:
+        source_hash = 1234567890
+        source_string = ""
 
       if StaticWeapon.objects.filter(hash=weapon['hash']).exists():
         # Updates StaticWeapon if it already exists

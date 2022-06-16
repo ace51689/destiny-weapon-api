@@ -5,6 +5,7 @@ import requests
 class Command(BaseCommand):
 
   def handle(self, *args, **options):
+    # Defining the url and headers for our request
     url = 'https://www.bungie.net/Platform/Destiny2/Manifest'
     headers = {'x-api-key': 'f5268091535243949c8bb6ace14cc3c3'}
     
@@ -16,12 +17,11 @@ class Command(BaseCommand):
     # Requesting the current manifest
     current_manifest = requests.get(base_url + current_location)
     plug_set_definitions = current_manifest.json()['DestinyPlugSetDefinition']
+    
+    single_plug_plugset_hashes = [405, 408, 411, 503, 1443, 1445, 1447]
 
     '''List comprehension returning only weapon objects of weapons that are 
     randomly rollable'''
-    single_plug_plugset_hashes = [405, 408, 411, 503, 1443, 1445, 1447]
-
-    # plug_set_list = [plug_set_definitions[item] for item in plug_set_definitions if plug_set_definitions[item]['hash'] in single_plug_plugset_hashes or (plug_set_definitions[item]['redacted'] == False and plug_set_definitions[item]['isFakePlugSet'] == False)]
     plug_set_list = [plug_set_definitions[item] for item in plug_set_definitions if plug_set_definitions[item]['redacted'] == False]
 
     for plug_set in plug_set_list:
