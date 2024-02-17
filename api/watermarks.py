@@ -110,7 +110,7 @@ watermark_list = [
       '/common/destiny2_content/icons/0669efb55951e8bc9e99f3989eacc861.png'
     ]
 
-relevent_watermark_list = [
+relevant_watermark_list = [
       # haunted
       '/common/destiny2_content/icons/81edbfbf0bacf8e2117c00d1d6115f1b.png',
       # witch queen
