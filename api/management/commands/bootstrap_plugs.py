@@ -74,4 +74,3 @@ class Command(BaseCommand):
                     description=display_properties['description']
                     )
                 print(f'Created "{plug.name}" Plug object')
-
