@@ -12,6 +12,7 @@ seasons_dictionary = {
       '/common/destiny2_content/icons/3de52d90db7ee2feb086ef6665b736b6.png': 'witch',
       '/common/destiny2_content/icons/6026e9d64e8c2b19f302dafb0286897b.png': 'deep',
       '/common/destiny2_content/icons/31445f1891ce9eb464ed1dcf28f43613.png': 'defiance',
+      '/common/destiny2_content/icons/af00bdcd3e3b89e6e85c1f63ebc0b4e4.png': 'defiance',
       '/common/destiny2_content/icons/e775dcb3d47e3d54e0e24fbdb64b5763.png': 'seraph',
       '/common/destiny2_content/icons/a3923ae7d2376a1c4eb0f1f154da7565.png': 'plunder',
       '/common/destiny2_content/icons/81edbfbf0bacf8e2117c00d1d6115f1b.png': 'haunted',
