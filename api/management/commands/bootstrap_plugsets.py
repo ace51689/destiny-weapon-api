@@ -15,13 +15,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Defining the url and headers for our request
-        url = 'https://www.bungie.net/Platform/Destiny2/Manifest'
         headers = {'x-api-key': API_KEY}
-    
-        # Requesting the manifest
-        manifest = requests.get(url, headers=headers)
-        current_location = manifest.json()['Response']['jsonWorldContentPaths']['en']
         base_url = 'https://www.bungie.net'
+        # Requesting the manifest
+        manifest = requests.get(f"{base_url}/Platform/Destiny2/Manifest", headers=headers)
+        current_location = manifest.json()['Response']['jsonWorldContentPaths']['en']
     
         # Requesting the current manifest
         current_manifest = requests.get(base_url + current_location)
