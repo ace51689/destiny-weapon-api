@@ -1,30 +1,15 @@
-import requests
-
 from django.core.management.base import BaseCommand
-from environ import Env
 
+from .helpers import get_manifest
 from api.models import StaticWeapon, PlugSet
 from api.watermarks import watermark_list, relevant_watermark_list, seasons_dictionary, expansions_dictionary
-
-env = Env()
-Env.read_env()
-
-API_KEY = env('API_KEY', default='temp')
 
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        url = 'https://www.bungie.net/Platform/Destiny2/Manifest'
-        headers = {'x-api-key': API_KEY}
-
-        # Requesting the manifest
-        manifest = requests.get(url, headers=headers)
-        current_location = manifest.json()['Response']['jsonWorldContentPaths']['en']
-        base_url = 'https://www.bungie.net'
-
-        # Requesting the current manifest
-        current_manifest = requests.get(base_url + current_location)
+        # Get the manifest
+        current_manifest = get_manifest()
         inventory_item_definitions = current_manifest.json()['DestinyInventoryItemDefinition']
         collectible_definitions = current_manifest.json()['DestinyCollectibleDefinition']
 

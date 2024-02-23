@@ -1,30 +1,15 @@
-import requests
-
 from django.core.management.base import BaseCommand
-from environ import Env
 
+from .helpers import get_manifest
 from api.models import PlugSet, Plug
-
-env = Env()
-Env.read_env()
-
-API_KEY = env('API_KEY', default='temp')
 
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        # Defining the url and headers for our request
-        headers = {'x-api-key': API_KEY}
-        base_url = 'https://www.bungie.net'
-        # Requesting the manifest
-        manifest = requests.get(f"{base_url}/Platform/Destiny2/Manifest", headers=headers)
-        current_location = manifest.json()['Response']['jsonWorldContentPaths']['en']
-    
-        # Requesting the current manifest
-        current_manifest = requests.get(base_url + current_location)
+        # Get the manifest
+        current_manifest = get_manifest()
         plug_set_definitions = current_manifest.json()['DestinyPlugSetDefinition']
-
         # TODO What was this for? Doesn't seem to be used anywhere. (MV 2/18/24)
         # single_plug_plugset_hashes = [405, 408, 411, 503, 1443, 1445, 1447]
 
