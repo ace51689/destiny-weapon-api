@@ -15,12 +15,15 @@ def get_manifest():
 	# Define the headers:
 	headers = {'x-api-key': API_KEY}
 	# Request the manifest:
-	# TODO add a try/except here
+	# TODO add a try/except and/or check for status_code here:
 	manifest = requests.get(f"{base_url}/Platform/Destiny2/Manifest", headers=headers)
 	# Define the current location:
 	current_location = manifest.json()['Response']['jsonWorldContentPaths']['en']
+	# Get the current manifest:
+	# TODO add a try/except and/or check for status_code here:
+	current_manifest = requests.get(base_url + current_location)
 	# Return the current manifest:
-	return requests.get(base_url + current_location)
+	return current_manifest
 
 
 def create_or_update_plugs(inventory_item_definitions):
@@ -171,8 +174,10 @@ def create_or_update_static_weapons(inventory_item_definitions, collectible_defi
 			damage_type = 'Solar'
 		elif weapon['defaultDamageType'] == 4:
 			damage_type = 'Void'
-		else:  # weapon['defaultDamageType'] == 6
+		elif weapon['defaultDamageType'] == 6:
 			damage_type = 'Stasis'
+		else:  # Damage type 7?
+			damage_type = 'Strand'
 
 		# Determining if the weapon has a non-sunset version
 		if quality['versions'][-1]['powerCapHash'] > 1862490585:
