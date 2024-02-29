@@ -1,12 +1,12 @@
 from django.shortcuts import render
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import StaticWeapon, Plug, PlugSet, WishlistWeapon
-from api.serializers import (StaticWeaponSerializer, PlugSerializer, PlugSetSerializer, WishlistWeaponSerializer)
+
+from models import StaticWeapon, Plug, PlugSet, WishlistWeapon
+from serializers import (StaticWeaponSerializer, PlugSerializer, PlugSetSerializer, WishlistWeaponSerializer)
 
 
-# Create your views here.
 class StaticWeaponViewset(ModelViewSet):
 	serializer_class = StaticWeaponSerializer
 	queryset = StaticWeapon.objects.all()

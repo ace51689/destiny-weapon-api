@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from api.models import StaticWeapon, PlugSet, WishlistWeapon, Plug
 
 # Register your models here.
