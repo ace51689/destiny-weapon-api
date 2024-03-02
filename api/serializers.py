@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer  # , Serializer
 # from rest_framework.response import Response
 
-from .models import StaticWeapon, Plug, PlugSet, WishlistWeapon
+from api.models import StaticWeapon, Plug, PlugSet, WishlistWeapon
 
 
 class StaticWeaponSerializer(ModelSerializer):

@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
 
-from .views import PlugSetViewset, StaticWeaponViewset, PlugViewset, WishlistWeaponViewset
+from api.views import PlugSetViewset, StaticWeaponViewset, PlugViewset, WishlistWeaponViewset
 
 router = routers.DefaultRouter()
 

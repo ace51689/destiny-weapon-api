@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 
-from models import StaticWeapon, Plug, PlugSet, WishlistWeapon
-from serializers import (StaticWeaponSerializer, PlugSerializer, PlugSetSerializer, WishlistWeaponSerializer)
+from api.models import StaticWeapon, Plug, PlugSet, WishlistWeapon
+from api.serializers import (StaticWeaponSerializer, PlugSerializer, PlugSetSerializer, WishlistWeaponSerializer)
 
 
 class StaticWeaponViewset(ModelViewSet):
